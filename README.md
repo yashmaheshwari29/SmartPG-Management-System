@@ -2,16 +2,17 @@
 
 ## Overview
 
-A full-stack PG management platform developed using AngularJS, PHP, and MySQL.
+A full-stack web application developed to simplify Paying Guest (PG) accommodation management. The system provides separate interfaces for administrators and tenants, enabling room management, tenant tracking, payment monitoring, and complaint handling.
 
 ## Features
 
+- User Authentication
+- Admin Dashboard
 - Tenant Management
 - Room Management
-- Complaint Management
 - Payment Tracking
-- Admin Dashboard
-- Role-Based Access Control
+- Complaint Management
+- Role-Based Access Control (RBAC)
 
 ## Technologies Used
 
@@ -22,13 +23,8 @@ A full-stack PG management platform developed using AngularJS, PHP, and MySQL.
 - MySQL
 - XAMPP
 
-## Architecture
+## Team Members
 
-3-Tier Architecture:
-Frontend → PHP APIs → MySQL Database
-
-## Team
-
-Yash Maheshwari
-Shriniket Awate
-Somya Mathur
+- Yash Maheshwari
+- Shriniket Awate
+- Somya Mathur
