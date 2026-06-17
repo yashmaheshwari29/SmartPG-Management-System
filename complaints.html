@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="smartPGApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Complaints – Smart PG</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="ComplaintsController">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">🏠 SmartPG <small>{{ isAdmin ? 'Admin' : 'Tenant' }} Panel</small></div>
+            <ul class="sidebar-nav">
+                <li ng-if="isAdmin"><a href="admin_dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+                <li ng-if="isAdmin"><a href="tenants.html"><span class="icon">👥</span> Tenants</a></li>
+                <li ng-if="isAdmin"><a href="rooms.html"><span class="icon">🛏️</span> Rooms</a></li>
+                <li ng-if="isAdmin"><a href="payments.html"><span class="icon">💰</span> Payments</a></li>
+                <li><a href="complaints.html" class="active"><span class="icon">📣</span> Complaints</a></li>
+                <li ng-if="!isAdmin"><a href="user_dashboard.html"><span class="icon">🏠</span> My Dashboard</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="btn btn-danger btn-full" ng-click="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="topbar">
+                <h2>📣 Complaints</h2>
+                <div class="user-info">👤 {{ user.name }}</div>
+            </div>
+
+            <div class="page-content">
+
+                <div class="alert alert-success" ng-if="message && messageType === 'success'">{{ message }}</div>
+                <div class="alert alert-error"   ng-if="message && messageType === 'error'">{{ message }}</div>
+
+                <!-- SUBMIT COMPLAINT FORM (All users can submit) -->
+                <div class="card">
+                    <div class="card-header"><h3>Submit a Complaint</h3></div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Describe Your Issue *</label>
+                            <textarea ng-model="newComplaint.description"
+                                      placeholder="e.g. Water leakage in bathroom, Fan not working, WiFi issue..."
+                                      rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-accent" ng-click="submitComplaint()">📤 Submit Complaint</button>
+                    </div>
+                </div>
+
+                <!-- COMPLAINTS TABLE -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>{{ isAdmin ? 'All Complaints' : 'My Complaints' }}</h3>
+                        <span style="font-size:13px; color:#888;">{{ complaints.length }} record(s)</span>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th ng-if="isAdmin">Tenant</th>
+                                        <th>Description</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th ng-if="isAdmin">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="c in complaints">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td ng-if="isAdmin">{{ c.tenant_name }}</td>
+                                        <td>{{ c.description }}</td>
+                                        <td>{{ c.date }}</td>
+                                        <td>
+                                            <span class="badge" ng-class="'badge-' + c.status">{{ c.status }}</span>
+                                        </td>
+                                        <td ng-if="isAdmin">
+                                            <button class="btn btn-success btn-sm"
+                                                    ng-click="closeComplaint(c.complaint_id)"
+                                                    ng-if="c.status === 'open'">
+                                                ✔ Close
+                                            </button>
+                                            <span ng-if="c.status !== 'open'" style="color:#aaa; font-size:13px;">Resolved</span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="complaints.length === 0">
+                                        <td colspan="6" class="loading">No complaints found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

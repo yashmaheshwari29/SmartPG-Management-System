@@ -1,0 +1,577 @@
+/* ============================================
+   Smart PG Management System - Stylesheet
+   Clean, simple, faculty-explainable CSS
+   ============================================ */
+
+/* === GLOBAL RESET & BASE STYLES === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    font-size: 15px;
+}
+
+/* === COLOR VARIABLES === */
+:root {
+    --primary:    #2c3e6b;   /* Dark blue - used for headers/sidebar */
+    --accent:     #e8a020;   /* Orange - used for highlights/buttons */
+    --success:    #27ae60;   /* Green - for 'paid' status */
+    --danger:     #e74c3c;   /* Red - for 'pending' or delete */
+    --light-bg:   #f0f2f5;   /* Page background */
+    --white:      #ffffff;
+    --border:     #dde1e7;
+    --text-muted: #7f8c8d;
+}
+
+/* ============================================
+   LOGIN PAGE STYLES
+   ============================================ */
+
+/* Full-screen login layout split into two halves */
+.login-page {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* LEFT SIDE - PG Info Panel */
+.login-left {
+    flex: 1;
+    background: linear-gradient(160deg, #2c3e6b 60%, #1a2540);
+    color: white;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-left .pg-logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: var(--accent);
+}
+
+.login-left h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.login-left p {
+    font-size: 15px;
+    opacity: 0.85;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+/* Facilities list on the left side */
+.facilities-list {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.facilities-list li {
+    padding: 8px 0;
+    font-size: 14px;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.facilities-list li span {
+    font-size: 18px;
+}
+
+/* Buttons on the left side */
+.login-action-btns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-outline-white {
+    padding: 10px 22px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn-outline-white:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* RIGHT SIDE - Login Form */
+.login-right {
+    flex: 0 0 420px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 40px;
+}
+
+.login-box {
+    width: 100%;
+}
+
+.login-box h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.login-box .subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* Form input groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.2s;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Error message */
+.error-msg {
+    color: var(--danger);
+    font-size: 13px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+/* ============================================
+   DASHBOARD LAYOUT (Sidebar + Main Content)
+   ============================================ */
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+    width: 240px;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    padding: 22px 20px;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    letter-spacing: 0.5px;
+}
+
+.sidebar-brand small {
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* Sidebar navigation links */
+.sidebar-nav {
+    list-style: none;
+    padding: 15px 0;
+    flex: 1;
+}
+
+.sidebar-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.sidebar-nav li a:hover,
+.sidebar-nav li a.active {
+    background: rgba(255,255,255,0.12);
+    color: white;
+}
+
+.sidebar-nav li a .icon {
+    font-size: 18px;
+    width: 22px;
+    text-align: center;
+}
+
+/* Logout button at the bottom of sidebar */
+.sidebar-footer {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* === MAIN CONTENT AREA === */
+.main-content {
+    margin-left: 240px;   /* offset by sidebar width */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top header bar */
+.topbar {
+    background: var(--white);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.topbar h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.topbar .user-info {
+    font-size: 14px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Page content padding */
+.page-content {
+    padding: 30px;
+    flex: 1;
+}
+
+/* ============================================
+   STATS / SUMMARY CARDS (Dashboard)
+   ============================================ */
+
+.stats-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+/* Each stat card */
+.stat-card {
+    flex: 1;
+    min-width: 160px;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 22px 20px;
+    border-left: 4px solid var(--primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.stat-card.orange { border-left-color: var(--accent); }
+.stat-card.green  { border-left-color: var(--success); }
+.stat-card.red    { border-left-color: var(--danger); }
+
+.stat-card .stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.stat-card .stat-value {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* ============================================
+   CARD (reusable white box)
+   ============================================ */
+
+.card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.card-body {
+    padding: 22px;
+}
+
+/* ============================================
+   TABLE STYLES
+   ============================================ */
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+table thead th {
+    background: #f7f8fa;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+}
+
+table tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #444;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:hover {
+    background-color: #fafbff;
+}
+
+/* ============================================
+   STATUS BADGES
+   ============================================ */
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.badge-paid,
+.badge-occupied,
+.badge-closed {
+    background: #d4f5e2;
+    color: #1a7a40;
+}
+
+.badge-pending,
+.badge-open {
+    background: #fde8d8;
+    color: #c0550a;
+}
+
+.badge-available {
+    background: #dceeff;
+    color: #1a5fa8;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover { opacity: 0.85; }
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+/* Full width button */
+.btn-full {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+}
+
+/* ============================================
+   FORM INSIDE CARD (Add Tenant etc.)
+   ============================================ */
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* ============================================
+   ALERT / INFO MESSAGES
+   ============================================ */
+
+.alert {
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.alert-success {
+    background: #d4f5e2;
+    color: #1a7a40;
+    border: 1px solid #a3e4bc;
+}
+
+.alert-error {
+    background: #fde8d8;
+    color: #c0550a;
+    border: 1px solid #f5bfa0;
+}
+
+.alert-info {
+    background: #dceeff;
+    color: #1a5fa8;
+    border: 1px solid #a8d4f5;
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ============================================
+   SECTION TITLE
+   ============================================ */
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+/* ============================================
+   RESPONSIVE - Simple mobile adjustment
+   ============================================ */
+
+@media (max-width: 768px) {
+    .login-left  { display: none; }
+    .login-right { flex: 1; }
+    .sidebar     { width: 200px; }
+    .main-content{ margin-left: 200px; }
+    .stats-grid  { flex-direction: column; }
+}

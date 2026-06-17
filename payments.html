@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="smartPGApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Payments – Smart PG</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="PaymentsController">
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">🏠 SmartPG <small>Admin Panel</small></div>
+            <ul class="sidebar-nav">
+                <li><a href="admin_dashboard.html"><span class="icon">📊</span> Dashboard</a></li>
+                <li><a href="tenants.html"><span class="icon">👥</span> Tenants</a></li>
+                <li><a href="rooms.html"><span class="icon">🛏️</span> Rooms</a></li>
+                <li><a href="payments.html" class="active"><span class="icon">💰</span> Payments</a></li>
+                <li><a href="complaints.html"><span class="icon">📣</span> Complaints</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="btn btn-danger btn-full" ng-click="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="topbar">
+                <h2>💰 Payment Records</h2>
+                <div class="user-info">👤 {{ user.name }}</div>
+            </div>
+
+            <div class="page-content">
+
+                <!-- Filter Buttons -->
+                <div style="margin-bottom:20px; display:flex; gap:10px;">
+                    <button class="btn btn-primary"
+                            ng-class="{'btn-accent': filterStatus === 'all'}"
+                            ng-click="filterStatus = 'all'">All</button>
+                    <button class="btn btn-primary"
+                            ng-class="{'btn-accent': filterStatus === 'paid'}"
+                            ng-click="filterStatus = 'paid'">Paid</button>
+                    <button class="btn btn-primary"
+                            ng-class="{'btn-accent': filterStatus === 'pending'}"
+                            ng-click="filterStatus = 'pending'">Pending</button>
+                </div>
+
+                <!-- PAYMENTS TABLE -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>All Payments</h3>
+                        <span style="font-size:13px;color:#888;">{{ filteredPayments().length }} record(s)</span>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tenant Name</th>
+                                        <th>Amount (₹)</th>
+                                        <th>Payment Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="p in filteredPayments()">
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ p.tenant_name }}</td>
+                                        <td>₹ {{ p.amount | number:2 }}</td>
+                                        <td>{{ p.payment_date }}</td>
+                                        <td>
+                                            <span class="badge" ng-class="'badge-' + p.status">{{ p.status }}</span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="filteredPayments().length === 0">
+                                        <td colspan="5" class="loading">No payment records found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
